@@ -1,0 +1,30 @@
+body {
+  background:#222;
+  color:#f1f1f1;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size:16px;
+  line-height:1.45rem;
+}
+
+main {
+  width:800px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:.25fr 1fr;
+
+  aside {
+    overflow:auto;
+    box-sizing: border-box;
+    padding:1rem;
+
+    a {
+      color: coral;
+      display:block;
+      text-decoration:none;
+
+      &:hover {
+        text-decoration:underline;
+      }
+    }
+  }
+}

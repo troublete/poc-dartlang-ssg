@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-	http.Handle("/", http.FileServer(http.Dir("./content")))
+	dir := http.Dir("./static")
+	http.Handle("/", http.FileServer(dir))
+	log.Println("starting server, listening on :" + os.Getenv("PORT"))
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatalf("%w", err)

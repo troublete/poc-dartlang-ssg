@@ -7,4 +7,5 @@ dependencies:
   front_matter: ^1.1.0
   markdown: ^7.1.0
   path: ^1.8.3
+  sass: ^1.62.1
   

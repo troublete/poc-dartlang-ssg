@@ -2,6 +2,7 @@ import "package:front_matter/front_matter.dart" as frontMatter;
 import "package:markdown/markdown.dart";
 import "dart:io";
 import "package:path/path.dart";
+import 'package:sass/sass.dart' as sass;
 
 class FileWrapper {
   File file;
@@ -55,37 +56,25 @@ void main() async {
   }
 
   menu.sort((a, b) => b.weight - a.weight);
+  var css = File("config/style.scss");
+  String? style;
+  if (await css.exists()) {
+    style = sass.compileToResult(css.path).css;
+  }
+
   for (FileWrapper article in files) {
     await article.file.create(recursive: true);
     await article.file.writeAsString('''
     <html>
       <head>
         <title>${article.meta["title"]} by ${article.meta["author"]}</title>
-        <style>
-        main {
-          display:flex;
-        }
-        
-        aside {
-          box-sizing: border-box;
-          padding: 1rem;
-        }
-        
-        aside a {
-          display:block;
-          text-decoration:none;
-        }
-        
-        aside a:hover {
-          text-decoration: underline
-        }
-        </style>
+        <style>${style!}</style>
       </head>
       <body>
         <main>
           <aside>${menu.map((e) => e.html).join("\n")}</aside>
           <section>
-          ${article.content}
+            ${article.content}
           </section>
         </main>
       </body>
